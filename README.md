@@ -128,3 +128,87 @@ The `__init__.py` file marks the directory as a package.
 
 The `addconst.py` file contains the implementation of our feature.
 
+    (pkgdemo-venv) bash$ pwd
+    /home/ecashin/src/python/pkgdemo/addconst
+    (pkgdemo-venv) bash$ grep -nv friendlypotato src/addconst/addconst.py 
+    1:class ConstAdder:
+    2:    def __init__(self, *, constant):
+    3:        self.constant = constant
+    4:
+    5:    def __call__(self, n):
+    6:        return n + self.constant
+    (pkgdemo-venv) bash$ 
+
+## Installing Editable Package
+
+By installing the package as "editable" with the `-e` option,
+we can go on changing the sources and having the changes
+take effect immediately.
+
+The command below has much output that is omitted.
+
+    (pkgdemo-venv) bash$ python3 -mpip install -e .[dev,tests]
+
+## Checking the Sources
+
+Now that the package installation has added dependencies
+to the virtual environment,
+we can run the linters.
+Because Python's type system is recent and optional,
+these are essential tools,
+worth reading about and mastering.
+
+In our case, there are no problems detected.
+
+    (pkgdemo-venv) bash$ black src/*/*.py
+    All done!
+    3 files left unchanged.
+    (pkgdemo-venv) bash$ flake8 src/*/*.py
+    (pkgdemo-venv) bash$ 
+
+## Testing the Sources
+
+A test can be created in a new `tests` subdirectory,
+where pytest will find it.
+You can see here that we import our package
+just as if it was something from a third-party software provider.
+
+    (pkgdemo-venv) bash$ pwd
+    /home/ecashin/src/python/pkgdemo/addconst
+    (pkgdemo-venv) bash$ black src/*/*.py tests/*.py; flake8 src/*/*.py tests/*.py
+    All done!
+    4 files left unchanged.
+    (pkgdemo-venv) bash$ grep -nv friendlypotato tests/test_addconst.py
+    1:from addconst.addconst import ConstAdder
+    2:
+    3:
+    4:def test_addconst():
+    5:    add1 = ConstAdder(constant=1)
+    6:    assert add1(2) == 3
+    7:    assert add1(-1) == 0
+    8:    add2 = ConstAdder(constant=2)
+    9:    assert add2(2) == 4
+    10:    assert add2(-20) == -18
+    (pkgdemo-venv) bash$ 
+    (pkgdemo-venv) bash$ pytest
+    ====================================================== test session starts =======================================================
+    platform linux -- Python 3.6.9, pytest-7.0.1, pluggy-1.0.0
+    rootdir: /home/ecashin/src/python/pkgdemo/addconst
+    collected 1 item                                                                                                                 
+    
+    tests/test_addconst.py .                                                                                                   [100%]
+    
+    ======================================================= 1 passed in 0.02s ========================================================
+    (pkgdemo-venv) bash$ 
+
+## Using Third-Party Packages
+
+The `main.py` driver uses `click` already.
+It makes command-line arguments and options easier to deal with.
+
+Let's try it.
+
+    (pkgdemo-venv) bash$ python3 src/addconst/main.py
+    hello
+    (pkgdemo-venv) bash$ 
+    

@@ -154,7 +154,7 @@ The command below has much output that is omitted.
 Now that the package installation has added dependencies
 to the virtual environment,
 we can run the linters.
-Because Python's type system is recent and optional,
+Because Python's support for static type checking is recent and optional,
 these are essential tools,
 worth reading about and mastering.
 

@@ -54,42 +54,46 @@ The example below uses [setuptools](https://setuptools.pypa.io/en/latest/usergui
 
 In an editor, we just created the `setuptools` configuration files
 displayed below.
-Please notice that there are two files.
+Please notice that there are two files
+displayed below using the UNIX numbered listing command, `nl`.
 
-    (pkgdemo-venv) bash$ grep -nv friendlypotato addconst/setup*
-    addconst/setup.cfg:1:[metadata]
-    addconst/setup.cfg:2:name = addconst
-    addconst/setup.cfg:3:version = 0.1.0.dev0
-    addconst/setup.cfg:4:description = Add a constant to given numbers
-    addconst/setup.cfg:5:long_description = file: README.md
-    addconst/setup.cfg:6:
-    addconst/setup.cfg:7:[options]
-    addconst/setup.cfg:8:package_dir =
-    addconst/setup.cfg:9:    =src
-    addconst/setup.cfg:10:packages = find:
-    addconst/setup.cfg:11:python_requires = >=3.7
-    addconst/setup.cfg:12:install_requires =
-    addconst/setup.cfg:13:    click >=8.0,<9
-    addconst/setup.cfg:14:
-    addconst/setup.cfg:15:[options.packages.find]
-    addconst/setup.cfg:16:where=src
-    addconst/setup.cfg:17:
-    addconst/setup.cfg:18:[options.extras_require]
-    addconst/setup.cfg:19:tests =
-    addconst/setup.cfg:20:    pytest
-    addconst/setup.cfg:21:dev =
-    addconst/setup.cfg:22:    black
-    addconst/setup.cfg:23:    flake8
-    addconst/setup.cfg:24:    ipython
-    addconst/setup.cfg:25:    isort
-    addconst/setup.cfg~:1:[metadata]
-    addconst/setup.cfg~:2:name = 
-    addconst/setup.py:1:#! /usr/bin/env python3
-    addconst/setup.py:2:
-    addconst/setup.py:3:from setuptools import setup
-    addconst/setup.py:4:
-    addconst/setup.py:5:
-    addconst/setup.py:6:setup()
+    (pkgdemo-venv) bash$ nl -b a addconst/setup.cfg
+     1  [metadata]
+     2  name = addconst
+     3  version = 0.1.0.dev0
+     4  description = Add a constant to given numbers
+     5  long_description = file: README.md
+     6
+     7  [options]
+     8  package_dir =
+     9      =src
+    10  packages = find:
+    11  python_requires = >=3.6
+    12  install_requires =
+    13      click >=8.0,<9
+    14
+    15  [options.packages.find]
+    16  where=src
+    17
+    18  [options.extras_require]
+    19  tests =
+    20      pytest
+    21  dev =
+    22      black
+    23      flake8
+    24      ipython
+    25      isort
+    (pkgdemo-venv) bash$
+
+And `setup.py` has to be there but has little in it.
+
+    (pkgdemo-venv) bash$ nl -b a addconst/setup.py
+         1  #! /usr/bin/env python3
+         2
+         3  from setuptools import setup
+         4
+         5
+         6  setup()
     (pkgdemo-venv) bash$ 
 
 ## Source Files
